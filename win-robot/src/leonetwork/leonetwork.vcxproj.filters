@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="api">
+      <UniqueIdentifier>{49e80af0-f1e1-4982-99ad-57a464366fa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{e25f8933-0ab5-4196-82ed-ca8fa0253d03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="operations">
+      <UniqueIdentifier>{1b46639d-106a-4024-869b-461610409fe9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{aef36928-7c1e-40ef-9581-c395c55929ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tcp_socket">
+      <UniqueIdentifier>{2510107f-f432-470b-a55d-91bc8c1e5127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{ec082fa5-339d-40e7-be54-d2f8334b12d5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\leo_im_sdk\include\leonetwork\netlib.h">
+      <Filter>tcp_socket</Filter>
+    </ClInclude>
+    <ClInclude Include="base_socket.h">
+      <Filter>tcp_socket</Filter>
+    </ClInclude>
+    <ClInclude Include="event_dispatch.h">
+      <Filter>tcp_socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libs\leo_im_sdk\include\leonetwork\im_conn.h">
+      <Filter>tcp_socket</Filter>
+    </ClInclude>
+    <ClInclude Include="tcp_sockets_manager.h">
+      <Filter>tcp_socket</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leonetwork\im_core.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leonetwork\lock.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leonetwork\ostype.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leonetwork\util.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leonetwork\error_code.h">
+      <Filter>operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leonetwork\exception.h">
+      <Filter>operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leonetwork\i_operation.h">
+      <Filter>operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leonetwork\operation.h">
+      <Filter>operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leonetwork\operation_manager.h">
+      <Filter>operations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leonetwork\yaolog.h">
+      <Filter>log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leonetwork\tt_pb_header.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leonetwork\util_pdu.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="leonetwork.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="util.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="netlib.cpp">
+      <Filter>tcp_socket</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="im_core.cpp">
+      <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="lock.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="operation.cpp">
+      <Filter>operations</Filter>
+    </ClCompile>
+    <ClCompile Include="operation_manager.cpp">
+      <Filter>operations</Filter>
+    </ClCompile>
+    <ClCompile Include="util_pdu.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="tt_pb_header.cpp">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="base_socket.cpp">
+      <Filter>tcp_socket</Filter>
+    </ClCompile>
+    <ClCompile Include="event_dispatch.cpp">
+      <Filter>tcp_socket</Filter>
+    </ClCompile>
+    <ClCompile Include="im_conn.cpp">
+      <Filter>tcp_socket</Filter>
+    </ClCompile>
+    <ClCompile Include="tcp_sockets_manager.cpp">
+      <Filter>tcp_socket</Filter>
+    </ClCompile>
+    <ClCompile Include="yaolog.cpp">
+      <Filter>log</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
