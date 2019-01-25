@@ -16,6 +16,9 @@
     <Filter Include="api">
       <UniqueIdentifier>{0c73afcc-a57c-48da-8421-e962c85e0050}</UniqueIdentifier>
     </Filter>
+    <Filter Include="protocol">
+      <UniqueIdentifier>{40288067-11ec-4cb2-9d09-1ac25fa9d436}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -33,6 +36,36 @@
     <ClInclude Include="api\tcp_client.h">
       <Filter>api</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.BaseDefine.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Buddy.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.File.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Group.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Login.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Message.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Other.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Server.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.SwitchService.pb.h">
+      <Filter>protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="api\im_sdk_dll.h">
+      <Filter>api</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -46,6 +79,33 @@
     </ClCompile>
     <ClCompile Include="api\tcp_client.cpp">
       <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.BaseDefine.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Buddy.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.File.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Group.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Login.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Message.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Other.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Server.pb.cc">
+      <Filter>protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.SwitchService.pb.cc">
+      <Filter>protocol</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

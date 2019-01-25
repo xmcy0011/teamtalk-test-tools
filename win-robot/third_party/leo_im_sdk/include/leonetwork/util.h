@@ -5,7 +5,7 @@
 
 #include "ostype.h"
 #include "lock.h"
-#include "leonetwork/yaolog.h"
+#include "yalog/yaolog.h"
 #include "global_config.h"
 #include <stdio.h>
 #include <stdlib.h>

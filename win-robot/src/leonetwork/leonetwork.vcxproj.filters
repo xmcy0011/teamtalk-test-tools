@@ -143,8 +143,5 @@
     <ClCompile Include="tcp_sockets_manager.cpp">
       <Filter>tcp_socket</Filter>
     </ClCompile>
-    <ClCompile Include="yaolog.cpp">
-      <Filter>log</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

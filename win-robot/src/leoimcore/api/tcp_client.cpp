@@ -1,17 +1,17 @@
 #include "stdafx.h"
-#include "leonetwork/yaolog.h"
+#include "yalog/yaolog.h"
 #include "tcp_client.h"
 #include "leonetwork/im_core.h"
-#include "leoprotocol/im.Login.pb.h"
-#include "leoprotocol/im.Other.pb.h"
+#include "leoprotocol/IM.Login.pb.h"
+#include "leoprotocol/IM.Other.pb.h"
 
 UInt16 g_seqNum = 0;
 
 TcpClient::TcpClient()
 	:m_tcpClientState(kTcpClientStateOK)
 	, m_pImLoginResp(0)
-	, m_pHearbeatTimer(0)
 	, m_pServerPingTimer(0)
+	, keepalive_thread_(nullptr)
 	, m_bDoReloginServerNow(FALSE)
 	, m_socketHandle(NETLIB_INVALID_HANDLE)
 {
@@ -87,7 +87,7 @@ IM::Login::IMLoginRes* TcpClient::doLogin(std::string &linkaddr, UInt16 port, st
 {
 	/* mod_S 需要在连接之前就进行清理，否则会返回上次的残留值，造成“登录成功”的假象 */
 	m_pImLoginResp->Clear();
-
+	m_pImLoginResp->set_result_code(IM::BaseDefine::REFUSE_REASON_DB_VALIDATE_FAILED);
 	/* 2017/04/24 10:11 : TcpClient 只允许有一个连接实例，
 	* 上一个连接没有关闭之前不许再创建一个新连接
 	*/
@@ -117,8 +117,7 @@ IM::Login::IMLoginRes* TcpClient::doLogin(std::string &linkaddr, UInt16 port, st
 		if (TcpClient_State::kTcpClientStateOK != m_tcpClientState)
 			return 0;
 
-		sendPacket(IM::BaseDefine::SID_LOGIN, IM::BaseDefine::CID_LOGIN_REQ_USERLOGIN, ++g_seqNum
-			, &imLoginReq);
+		sendPacket(IM::BaseDefine::SID_LOGIN, IM::BaseDefine::CID_LOGIN_REQ_USERLOGIN, ++g_seqNum, &imLoginReq);
 
 		waitSingleObject(m_eventReceived, 10000);
 	}
@@ -177,25 +176,31 @@ void TcpClient::_sendPacket(google::protobuf::MessageLite* pbBody)
 
 void TcpClient::startHeartbeat()
 {
-	module::getEventManager()->scheduleTimerWithLambda(5, TRUE,
-		[=]()
-	{
-		imcore::IMLibCoreStartOperationWithLambda(
-			[=]()
+	std::thread t([=]() {
+		while (true)
 		{
-			IM::Other::IMHeartBeat imHearBeat;
-			sendPacket(IM::BaseDefine::SID_OTHER, IM::BaseDefine::CID_OTHER_HEARTBEAT, &imHearBeat);
+			imcore::IMLibCoreStartOperationWithLambda(
+				[=]()
+			{
+				IM::Other::IMHeartBeat imHearBeat;
+				sendPacket(IM::BaseDefine::SID_OTHER, IM::BaseDefine::CID_OTHER_HEARTBEAT, &imHearBeat);
+			}
+			);
+
+			Sleep(5 * 1000); // 每5秒一个包
 		}
-		);
-	}
-	, &m_pHearbeatTimer);
+	});
+	keepalive_thread_ = &t;
 }
 
 void TcpClient::_stopHearbeat()
 {
-	if (m_pHearbeatTimer)
-		module::getEventManager()->killTimer(m_pHearbeatTimer);
-	m_pHearbeatTimer = 0;
+	if (keepalive_thread_ != nullptr)
+	{
+		keepalive_thread_->joinable();
+		keepalive_thread_->join();
+	}
+	keepalive_thread_ = nullptr;
 }
 
 void TcpClient::_handlePacketOperation(const char* data, UInt32 size)
@@ -207,7 +212,7 @@ void TcpClient::_handlePacketOperation(const char* data, UInt32 size)
 		imcore::TTPBHeader header;
 		header.unSerialize((byte*)copyInBuffer.data(), imcore::HEADER_LENGTH);
 
-		module::IPduPacketParse* pModule = (module::IPduPacketParse*)__getModule(header.getModuleId());
+		IPduPacketParse* pModule = nullptr;// (IPduPacketParse*)__getModule(header.getModuleId());
 		if (!pModule)
 		{
 			assert(FALSE);
@@ -222,16 +227,16 @@ void TcpClient::_handlePacketOperation(const char* data, UInt32 size)
 
 void TcpClient::_startServerPingTimer()
 {
-	if (!m_pServerPingTimer)
+	/*if (!m_pServerPingTimer)
 		m_pServerPingTimer = new ServerPingTimer(this);
-	module::getEventManager()->scheduleTimer(m_pServerPingTimer, 60, TRUE);
+		module::getEventManager()->scheduleTimer(m_pServerPingTimer, 60, TRUE);*/
 }
 
 void TcpClient::_stopServerPingTimer()
 {
-	if (m_pServerPingTimer)
+	/*if (m_pServerPingTimer)
 		module::getEventManager()->killTimer(m_pServerPingTimer);
-	m_pServerPingTimer = 0;
+		m_pServerPingTimer = 0;*/
 }
 
 void TcpClient::_doReloginServer()

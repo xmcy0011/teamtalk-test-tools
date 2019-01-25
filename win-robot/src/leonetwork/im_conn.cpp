@@ -153,11 +153,9 @@ void CImConn::OnRead()
 		{
 			uint32_t len = m_in_buf.GetWriteOffset();
 
-			// add_s by xuyc 2018-12-11 10:27:47 升级协议头
-			// 偏移4字节，读取数据部长度
-			uint32_t length = CByteStream::ReadUint32(m_in_buf.GetBuffer() + 4);
-			// add_e
-
+			// 读取数据部长度
+			uint32_t length = CByteStream::ReadUint32(m_in_buf.GetBuffer());
+			
 			if (length > len)
 				break;
 

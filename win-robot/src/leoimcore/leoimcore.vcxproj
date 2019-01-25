@@ -28,7 +28,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -71,9 +71,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)..\..\bin\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)..\..\bin\$(Configuration)_$(ProjectName)_Temp\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)..\..\bin\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)..\..\bin\$(Configuration)_$(ProjectName)_Temp\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -88,11 +92,15 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LEOIMCORE_EXPORTS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>F:\gitrepo\teamtalk-test-tools\win-robot\third_party\leo_im_sdk\include;F:\gitrepo\teamtalk-test-tools\win-robot\third_party\protobuf3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\third_party;$(ProjectDir)..\..\third_party\leo_im_sdk\include;$(ProjectDir)..\..\third_party\protobuf3;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>$(ProjectDir)..\..\libs\$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>leonetwork.lib;libprotobufd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\third_party\protobuf3\lib\debug;$(ProjectDir)..\..\libs\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -100,12 +108,15 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;LEOIMCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;LEOIMCORE_EXPORTS;_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\third_party\leo_im_sdk\include;$(ProjectDir)..\..\third_party\protobuf3</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>leonetwork.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\libs\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -146,12 +157,31 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.BaseDefine.pb.h" />
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Buddy.pb.h" />
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.File.pb.h" />
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Group.pb.h" />
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Login.pb.h" />
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Message.pb.h" />
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Other.pb.h" />
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Server.pb.h" />
+    <ClInclude Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.SwitchService.pb.h" />
+    <ClInclude Include="api\im_sdk_dll.h" />
     <ClInclude Include="api\i_event.h" />
     <ClInclude Include="api\tcp_client.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.BaseDefine.pb.cc" />
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Buddy.pb.cc" />
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.File.pb.cc" />
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Group.pb.cc" />
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Login.pb.cc" />
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Message.pb.cc" />
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Other.pb.cc" />
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.Server.pb.cc" />
+    <ClCompile Include="..\..\third_party\leo_im_sdk\include\leoprotocol\IM.SwitchService.pb.cc" />
     <ClCompile Include="api\tcp_client.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>

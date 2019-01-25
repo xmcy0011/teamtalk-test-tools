@@ -11,8 +11,24 @@
 #include "leonetwork/tt_pb_header.h"
 #include "leoprotocol/IM.Login.pb.h"
 #include "i_event.h"
+#include "im_sdk_dll.h"
+#include <thread>
 
 using namespace module;
+
+struct IPduPacketParse
+{
+public:
+	/**
+	* 收到TcpClient网络包后的包解析回调接口
+	*
+	* @param   std::auto_ptr<CImPdu> pdu
+	* @return  void
+	* @exception there is no any exception to throw.
+	*/
+
+	virtual void onPacket(imcore::TTPBHeader& header, std::string& pbBody) = 0;
+};
 
 struct ITcpClientSocketCallback
 {
@@ -48,7 +64,7 @@ public:
 * The class <code>客户端TCP网络长连接模块实现，对TcpClientScoket做一个适配</code>
 *
 */
-class TcpClient final : public ITcpSocketCallback
+class IM_SDK_DLL TcpClient final : public ITcpSocketCallback
 {
 	friend class ServerPingTimer;
 public:
@@ -85,8 +101,8 @@ private:
 	void _sendPacket(google::protobuf::MessageLite* pbBody);
 
 private:
+	std::thread*					keepalive_thread_;
 	IM::Login::IMLoginRes*			m_pImLoginResp;
-	module::ITimerEvent*			m_pHearbeatTimer;
 	ServerPingTimer*				m_pServerPingTimer;
 	BOOL							m_bDoReloginServerNow;
 	UInt8							m_tcpClientState;
