@@ -6,7 +6,7 @@
 syntax="proto3";
 package IM.Message;
 import "IM.BaseDefine.proto";
-option java_package = "com.mogujie.tt.protobuf";
+option java_package = "lib.protocol";
 //由于生成java代码时不在支持 optimize_for = LITE_RUNTIME；采用默认的SPEED
 //option optimize_for = LITE_RUNTIME;
 

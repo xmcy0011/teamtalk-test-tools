@@ -5,7 +5,7 @@
 
 syntax = "proto3";
 package IM.BaseDefine;
-option java_package = "com.mogujie.tt.protobuf";
+option java_package = "lib.protocol";
 //option java_outer_classname = "MOGUJIEIMMessage";
 //由于生成java代码时不在支持 optimize_for = LITE_RUNTIME；采用默认的SPEED
 //LITE_RUNTIME;//文件级别的选项:SPEED/CODE_SIZE/LITE_RUNTIME, 调试使用SPEED
